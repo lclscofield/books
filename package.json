@@ -21,8 +21,12 @@
   },
   "homepage": "https://github.com/lclscofield/books#readme",
   "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
     "ejs": "^2.6.1",
     "koa": "^2.7.0",
-    "koa-views": "^6.2.0"
-  }
+    "koa-static": "^5.0.0",
+    "koa-views": "^6.2.0",
+    "request": "^2.88.0"
+  },
+  "devDependencies": {}
 }

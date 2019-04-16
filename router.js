@@ -1,10 +1,22 @@
+const handlers = require('./handlers')
+
 // 路由分发
-function route(ctx) {
+const handle = {
+  '/': handlers.index,
+  '/search': handlers.search
+}
+
+async function route(ctx) {
   const req = ctx.request
-  console.log(req.path)
+  const pathName = req.path
+  console.log(pathName)
+  if (typeof handle[pathName] === 'function') {
+    const tem = await handle[pathName](ctx)
+    await ctx.render(tem.path, tem.data)
+  }
 }
 
 module.exports = async function(ctx, next) {
-  route(ctx)
+  await route(ctx)
   await next()
 }
