@@ -1,23 +1,16 @@
 const { getHtml } = require('../common')
-const { getSearchData } = require('../service')
+const service = require('../service')
 
 module.exports = {
-  async index() {
-    return {
-      path: 'index'
-    }
+  async home() {
+    const url = encodeURI('https://www.qu.la')
+    const data = await service.home(await getHtml({ url }))
+    return data
   },
   async search(ctx) {
     const query = ctx.query
-    const url = `https://sou.xanbhx.com/search?siteid=qula&q=${query.val}`
-    const data = await getSearchData(
-      await getHtml({
-        url: encodeURI(url)
-      })
-    )
-    return {
-      path: 'search',
-      data
-    }
+    const url = encodeURI(`https://sou.xanbhx.com/search?siteid=qula&q=${query.val}`)
+    const data = await service.search(await getHtml({ url }))
+    return data
   }
 }
